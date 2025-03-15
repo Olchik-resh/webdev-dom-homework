@@ -64,46 +64,48 @@
   </body>
 
   <script>
-    "use strict";
     const buttonEl = document.querySelector ('.add-form-button');
     const nameEl = document.querySelector ('.add-form-name');
     const commentEl = document.querySelector ('.add-form-text');
     const listEl = document.querySelector ('.comments');
-
     nameEl.addEventListener ('input', (event) =>
       {console.log (event.target.value);
     }) 
-
     commentEl.addEventListener ('input', (event) =>
       {console.log (event.target.value);
     }) 
-
     buttonEl.addEventListener('click', function(e) {
-      const date = new Date();
-      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-      const newComment = `<li class="comment">
-        <div class="comment-header">
-          <div>${nameEl.value}</div>
-          <div>${formattedDate}</div>
-        </div>
-          <div class="comment-body">
-            <div class="comment-text">
-        ${commentEl.value}
-            </div>
-          </div>
-        <div class="comment-footer">
-          <div class="likes">
-            <span class="likes-counter">0</span>
-            <button class="like-button"></button>
-          </div>
-        </div>
-      </li>`;
-      listEl.innerHTML += newComment;
+  const name = nameEl.value.trim();
+  const comment = commentEl.value.trim();
 
-      nameEl.value = "";
-      commentEl.value = "";
-    });
-   
-    console.log("It works!");
+  if (name === '' || comment === '') {
+    alert('Пожалуйста, укажите имя и текст комментария.');
+    return;
+  }
+
+  const date = new Date();
+  const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  const newComment = `<li class="comment">
+    <div class="comment-header">
+      <div>${name}</div>
+      <div>${formattedDate}</div>
+    </div>
+    <div class="comment-body">
+      <div class="comment-text">
+        ${comment}
+      </div>
+    </div>
+    <div class="comment-footer">
+      <div class="likes">
+        <span class="likes-counter">0</span>
+        <button class="like-button"></button>
+      </div>
+    </div>
+  </li>`;
+
+  listEl.innerHTML += newComment;
+  nameEl.value = "";
+  commentEl.value = "";
+});
   </script>
 </html>
