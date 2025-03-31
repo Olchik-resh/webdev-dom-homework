@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
   <head>
     <title>Проект "Комменты"</title>
     <meta charset="utf-8" />
@@ -8,7 +7,7 @@
 
   <body>
     <div class="container">
-      <ul class="comments">
+      <ul id="commentsList" class="comments">
         <li class="comment">
           <div class="comment-header">
             <div>Глеб Фокин</div>
@@ -20,9 +19,9 @@
             </div>
           </div>
           <div class="comment-footer">
-            <div class="likes">
+            <div id="likesContainer" class="likes">
               <span class="likes-counter">3</span>
-              <button class="like-button"></button>
+              <button data-index="${index}" class="like-button"></button>
             </div>
           </div>
         </li>
@@ -37,9 +36,9 @@
             </div>
           </div>
           <div class="comment-footer">
-            <div class="likes">
+            <div id="likesContainer" class="likes">
               <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
+              <button data-index="${index}" class="like-button -active-like"></button>
             </div>
           </div>
         </li>
@@ -64,46 +63,102 @@
   </body>
 
   <script>
-    "use strict";
+  
+//массив
+    let comments = [
+      {name: 'Глеб Фокин', date: '12.02.22 12:18', text: 'Это будет первый комментарий на этой странице', Likes: 3, isLikes: false},
+      {name: 'Варвара Н.', date: '13.02.22 19:22', text: 'Мне нравится как оформлена эта страница! ❤', Likes: 75, isLikes: false}
+    ];
+
+//рендер функция
+  function renderComments() {
+    commentsListEl.innerHTML = comments
+    .map((comment, index) => {
+    return `
+      <li class="comment">
+        <div class="comment-header">
+          <div>${comment.name}</div>
+          <div>${comment.date}</div>
+        </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            ${comment.text}
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div id="likesContainer" class="likes">
+            <span class="likes-counter">${comment.Likes}</span>
+            <button 
+              class="like-button ${comment.isLikes ? '-active-like' : ''}" 
+              data-index="${index}"
+            >
+            </button>
+          </div>
+        </div>
+      </li>
+      `;
+    })
+    .join("");
+  }
+
+ // Обработчик клика на кнопку лайка
+  function handleLikeClick(event) {
+  const index = parseInt(event.target.dataset.index); 
+    if (!isNaN(index)) { 
+      const comment = comments[index];
+    if (comment) { 
+      comment.isLikes = !comment.isLikes; 
+      if (comment.isLikes) {
+        comment.Likes++;
+      } else {
+        comment.Likes--; 
+      }
+
+      renderComments();
+    }}}
+
+    const commentsListEl = document.getElementById('commentsList');
+    commentsListEl.addEventListener("click", (event) => {
+      if (event.target.classList.contains("like-button")) {
+        handleLikeClick(event);
+      }
+    });
+
+    renderComments();
+
+    //комментарий
     const buttonEl = document.querySelector ('.add-form-button');
     const nameEl = document.querySelector ('.add-form-name');
     const commentEl = document.querySelector ('.add-form-text');
     const listEl = document.querySelector ('.comments');
+    
+    buttonEl.addEventListener('click', function() {
+      if (nameEl.value.trim()===""||commentEl.value.trim ()==="") {
+        alert ("Пожалуйста, укажите имя и текст комментария.");
+        return;
+    }
 
-    nameEl.addEventListener ('input', (event) =>
-      {console.log (event.target.value);
-    }) 
-
-    commentEl.addEventListener ('input', (event) =>
-      {console.log (event.target.value);
-    }) 
-
-    buttonEl.addEventListener('click', function(e) {
-      const date = new Date();
-      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-      const newComment = `<li class="comment">
-        <div class="comment-header">
-          <div>${nameEl.value}</div>
-          <div>${formattedDate}</div>
-        </div>
-          <div class="comment-body">
-            <div class="comment-text">
-        ${commentEl.value}
-            </div>
-          </div>
-        <div class="comment-footer">
-          <div class="likes">
-            <span class="likes-counter">0</span>
-            <button class="like-button"></button>
-          </div>
-        </div>
-      </li>`;
-      listEl.innerHTML += newComment;
-
+    const newComment = {
+      name: nameEl.value,
+      date: `${new Date().toLocaleDateString("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit"
+     })} ${new Date().toLocaleTimeString("ru-RU", {
+      hour: "2-digit",
+      minute: "2-digit"
+    })}`,
+      text: commentEl.value,
+      Likes: 0,
+      isLikes: false,
+    };
+      comments.push(newComment);
+      renderComments();
+  
       nameEl.value = "";
       commentEl.value = "";
-    });
-   
-    console.log("It works!");
+  });
+
+         
   </script>
 </html>
