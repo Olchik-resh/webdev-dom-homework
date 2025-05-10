@@ -47,12 +47,9 @@ export const initAddCommentListener = (renderComments) => {
         }
 
         document.querySelector('.form-loading').style.display = 'block'
-        document.querySelector('.add-form').style.display = 'none'
 
         postComment(sanitizeHtml(name.value), sanitizeHtml(text.value)).then(
             (data) => {
-                document.querySelector('.form-loading').style.display = 'none'
-                document.querySelector('.add-form').style.display = 'flex'
                 updateComments(data)
                 renderComments()
                 name.value = ''
