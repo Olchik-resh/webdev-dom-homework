@@ -1,0 +1,88 @@
+import { comments } from './comments.js'
+
+export const initLikeListeners = (renderComments) => {
+    const likeButtons = document.querySelectorAll('.like-button')
+
+    for (const likeButton of likeButtons) {
+        console.log('Атрибут data-index:', likeButton.dataset.index)
+        likeButton.addEventListener('click', (event) => {
+            console.log('Клик по кнопке «лайк»')
+
+            const index = likeButton.dataset.index
+            const comment = comments[index]
+
+            console.log('comment.isLikes до изменения:', comment.isLikes)
+
+            comment.likes = comment.isLikes
+                ? comment.likes - 1
+                : comment.likes + 1
+
+            comment.isLikes = !comment.isLikes
+
+            console.log('comment.likes после изменения:', comment.likes)
+            console.log('comment.isLikes после изменения:', comment.isLikes)
+
+            renderComments()
+            console.log('renderComments вызван')
+
+            event.stopPropagation()
+        })
+    }
+}
+
+export const initReplyListeners = () => {
+    const commentClick = () => {
+        const commentEl = document.querySelector('.add-form-text')
+        const commentElements = document.querySelectorAll('.comment')
+        for (const commentElement of commentElements) {
+            commentElement.addEventListener('click', () => {
+                const commentIndex = commentElement.dataset.index
+                const comment = comments[commentIndex]
+                commentEl.value = `>${comment.name}: ${comment.text}\n\n`
+                commentEl.focus()
+            })
+        }
+    }
+    commentClick()
+}
+
+export const initAddCommentListener = (renderComments) => {
+    const buttonEl = document.querySelector('.add-form-button')
+    const nameEl = document.querySelector('.add-form-name')
+    const commentEl = document.querySelector('.add-form-text')
+
+    buttonEl.addEventListener('click', function () {
+        //добавляет обработчик клика на кнопку добавления комментария.
+        if (nameEl.value.trim() === '' || commentEl.value.trim() === '') {
+            alert('Пожалуйста, укажите имя и текст комментария.')
+            return
+        }
+
+        const newComment = {
+            name: nameEl.value.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+            date: `${new Date().toLocaleDateString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: '2-digit',
+            })} ${new Date().toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit',
+            })}`,
+            text: commentEl.value.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+            likes: 0,
+            isLikes: false,
+        }
+        // comments.push(newComment)
+        // renderComments()
+
+        fetch (`https://wedev-api.sky.pro/api/v1/olchik-resh/comments`,
+            method: "POST",
+           body: JSON.(newComment)
+        )
+
+        nameEl.value = ''
+        commentEl.value = ''
+    })
+
+    renderComments()
+}
