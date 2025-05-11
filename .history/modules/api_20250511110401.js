@@ -15,19 +15,8 @@ export const fetchComments = () => {
                     isLikes: false,
                 }
             })
+
             return appComments
-        })
-        .catch((error) => {
-            if (error.message.includes('500')) {
-                console.error('Произошла ошибка на сервере:', error)
-                alert('Произошла ошибка на сервере')
-            } else if (error.message.includes('network')) {
-                console.error('Ошибка сети:', error)
-                alert('Нет интернета, попробуйте снова')
-            } else {
-                console.error('Ошибка:', error.message)
-                alert('Произошла непредвиденная ошибка')
-            }
         })
 }
 
