@@ -1,1 +1,0 @@
-import {renderComments} from "./modules/renderComments"

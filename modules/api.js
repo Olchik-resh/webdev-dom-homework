@@ -50,7 +50,4 @@ export const postComment = (name, text) => {
                 return response.json()
             }
         })
-        .then(() => {
-            return fetchComments()
-        })
 }

@@ -1,6 +1,7 @@
 import { postComment } from './api.js'
 import { comments, updateComments } from './comments.js'
 import { sanitizeHtml } from './sanitizeHtml.js'
+import { fetchComments } from './api.js'
 
 export const initLikeListeners = (renderComments) => {
     const likeButtons = document.querySelectorAll('.like-button')
@@ -53,11 +54,15 @@ export const initAddCommentListener = (renderComments) => {
             .then((data) => {
                 document.querySelector('.form-loading').style.display = 'none'
                 document.querySelector('.add-form').style.display = 'flex'
-
+                
                 updateComments(data)
-                renderComments()
                 name.value = ''
                 text.value = ''
+                return fetchComments()
+            })
+            .then((comments) => {
+                renderComments(comments);
+                console.log('Комментарий успешно добавлен и список обновлен!');
             })
             .catch((error) => {
                 document.querySelector('.form-loading').style.display = 'none'
