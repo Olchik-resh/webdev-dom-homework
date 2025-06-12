@@ -23,6 +23,10 @@ export const fetchComments = () => {
 export const postComment = (name, text) => {
     return fetch(host + '/comments', {
         method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
             name,
             text,
@@ -43,5 +47,3 @@ export const postComment = (name, text) => {
             console.error('Ошибка при добавлении комментария:', error)
         })
 }
-
-

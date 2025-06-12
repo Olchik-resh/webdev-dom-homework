@@ -44,4 +44,21 @@ export const postComment = (name, text) => {
         })
 }
 
-
+export const fetchComments = () => {
+    return fetch(host + '/comments', {
+        method: 'GET',
+        
+    })
+        .then((response) => {
+            if (response.status === 500) {
+                throw new Error('Ошибка сервера')
+            }
+            if (response.status === 400) {
+                throw new Error('Неверный запрос')
+            }
+            return response.json()
+        })
+        .catch((error) => {
+            console.error('Ошибка при получении комментариев:', error)
+        })
+}

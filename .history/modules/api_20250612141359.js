@@ -43,5 +43,3 @@ export const postComment = (name, text) => {
             console.error('Ошибка при добавлении комментария:', error)
         })
 }
-
-

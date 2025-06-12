@@ -44,4 +44,3 @@ export const postComment = (name, text) => {
         })
 }
 
-
