@@ -1,5 +1,5 @@
-import { updateComments } from './comments.js'
-import { renderComments } from './renderComments.js'
+import { updateComments } from "./comments.js"
+import { renderComments } from "./renderComments.js"
 
 export const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
 
@@ -9,25 +9,28 @@ export const fetchComments = () => {
             return res.json()
         })
         .then((responseData) => {
-            const appComments = responseData.comments.map((comment) => {
+            console.log(responseData); // Проверяем формат данных
+            const appComments = responseData.comments.map(comment => {
                 return {
                     name: comment.author.name,
-                    date: new Date(comment.date),
+                    date: new Date (comment.date),
                     text: comment.text,
                     likes: comment.likes,
                     isLikes: false,
                 }
             })
-
-            console.log(appComments)
+            
+            console.log(appComments);
             return appComments
         })
 }
 
-fetchComments().then((data) => {
-    updateComments(data)
-    renderComments()
-})
+fetchComments()
+    .then(data => {
+        console.log(data); // Проверяем формат данных
+        updateComments(data);
+        renderComments();
+    });
 
 export const postComment = (name, text) => {
     return fetch(host + '/comments', {
@@ -52,3 +55,5 @@ export const postComment = (name, text) => {
             console.error('Ошибка при добавлении комментария:', error)
         })
 }
+
+

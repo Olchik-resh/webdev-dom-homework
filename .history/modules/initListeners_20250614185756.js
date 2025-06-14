@@ -2,6 +2,7 @@ import { fetchComments, postComment } from './api.js'
 import { comments, updateComments } from './comments.js'
 import { sanitizeHtml } from './sanitizeHtml.js'
 
+
 export const initLikeListeners = (renderComments) => {
     const likeButtons = document.querySelectorAll('.like-button')
 
@@ -54,7 +55,8 @@ export const initAddCommentListener = (renderComments) => {
                 return fetchComments()
             })
             .then((comments) => {
-                updateComments(comments)
+               
+                updateComments(comment)
                 renderComments()
                 document.querySelector('.form-loading').style.display = 'none'
                 document.querySelector('.add-form').style.display = 'flex'

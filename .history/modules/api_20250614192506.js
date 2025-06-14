@@ -25,6 +25,7 @@ export const fetchComments = () => {
 }
 
 fetchComments().then((data) => {
+    
     updateComments(data)
     renderComments()
 })

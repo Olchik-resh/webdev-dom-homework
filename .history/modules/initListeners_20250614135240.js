@@ -1,6 +1,7 @@
-import { fetchComments, postComment } from './api.js'
+import { postComment } from './api.js'
 import { comments, updateComments } from './comments.js'
 import { sanitizeHtml } from './sanitizeHtml.js'
+import { host } from './api.js'
 
 export const initLikeListeners = (renderComments) => {
     const likeButtons = document.querySelectorAll('.like-button')
@@ -51,10 +52,25 @@ export const initAddCommentListener = (renderComments) => {
 
         postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
             .then(() => {
-                return fetchComments()
+                // После успешного добавления комментария делаем GET-запрос за новыми актуальными комментариями
+                return fetch(host + '/comments', {
+                    method: 'GET',
+                })
             })
-            .then((comments) => {
-                updateComments(comments)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                console.log(data) // Проверяем формат данных
+                if (Array.isArray(data)) {
+                    updateComments(data)
+                } else {
+                    console.error(
+                        'Полученные данные не являются массивом:',
+                        data,
+                    )
+                }
+
                 renderComments()
                 document.querySelector('.form-loading').style.display = 'none'
                 document.querySelector('.add-form').style.display = 'flex'

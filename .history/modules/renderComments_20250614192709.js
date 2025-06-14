@@ -3,6 +3,7 @@ import { initLikeListeners, initReplyListeners } from './initListeners.js'
 
 export const renderComments = () => {
     const listEl = document.querySelector('.comments')
+    
     if (Array.isArray(comments)) {
         listEl.innerHTML = comments
             .map((comment, index) => {

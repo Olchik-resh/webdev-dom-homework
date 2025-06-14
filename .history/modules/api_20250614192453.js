@@ -25,6 +25,7 @@ export const fetchComments = () => {
 }
 
 fetchComments().then((data) => {
+    console.log(data) // Проверяем формат данных
     updateComments(data)
     renderComments()
 })
