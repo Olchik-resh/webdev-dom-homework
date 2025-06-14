@@ -3,13 +3,14 @@ import { renderComments } from "./renderComments.js"
 
 export const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
 
+
+
 export const fetchComments = () => {
     return fetch(host + '/comments')
         .then((res) => {
             return res.json()
         })
         .then((responseData) => {
-            console.log(responseData); // Проверяем формат данных
             const appComments = responseData.comments.map(comment => {
                 return {
                     name: comment.author.name,
@@ -19,15 +20,14 @@ export const fetchComments = () => {
                     isLikes: false,
                 }
             })
-            
-            console.log(appComments);
+
             return appComments
         })
 }
 
 fetchComments()
     .then(data => {
-        console.log(data); // Проверяем формат данных
+        console.log(data); // Проверьте формат данных
         updateComments(data);
         renderComments();
     });

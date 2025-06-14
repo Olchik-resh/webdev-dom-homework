@@ -27,7 +27,7 @@ export const initLikeListeners = (renderComments) => {
 export const initReplyListeners = () => {
     const text = document.getElementById('text-input')
     const commentElements = document.querySelectorAll('.comment')
-    
+
     for (const commentElement of commentElements) {
         commentElement.addEventListener('click', () => {
             const currentComment = comments[commentElement.dataset.index]
@@ -65,7 +65,7 @@ export const initAddCommentListener = (renderComments) => {
                 document.querySelector('.add-form').style.display = 'flex'
                 
                 updateComments(data)
-                renderComments()
+                
                 name.value = ''
                 text.value = ''
             })

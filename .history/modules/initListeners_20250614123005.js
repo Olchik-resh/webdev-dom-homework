@@ -27,7 +27,7 @@ export const initLikeListeners = (renderComments) => {
 export const initReplyListeners = () => {
     const text = document.getElementById('text-input')
     const commentElements = document.querySelectorAll('.comment')
-    
+
     for (const commentElement of commentElements) {
         commentElement.addEventListener('click', () => {
             const currentComment = comments[commentElement.dataset.index]
@@ -58,17 +58,22 @@ export const initAddCommentListener = (renderComments) => {
                 })
             })
             .then((response) => {
+                if (response.ok) {
                     return response.json()
+                } else {
+                    throw new Error('Ошибка при получении комментариев')
+                }
             })
             .then((data) => {
                 document.querySelector('.form-loading').style.display = 'none'
                 document.querySelector('.add-form').style.display = 'flex'
-                
                 updateComments(data)
                 renderComments()
                 name.value = ''
                 text.value = ''
             })
-            
+            .catch((error) => {
+                console.error('Ошибка:', error)
+            })
     })
 }

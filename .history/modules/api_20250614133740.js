@@ -9,7 +9,7 @@ export const fetchComments = () => {
             return res.json()
         })
         .then((responseData) => {
-            console.log(responseData); // Проверяем формат данных
+            
             const appComments = responseData.comments.map(comment => {
                 return {
                     name: comment.author.name,
@@ -19,8 +19,7 @@ export const fetchComments = () => {
                     isLikes: false,
                 }
             })
-            
-            console.log(appComments);
+
             return appComments
         })
 }

@@ -2,12 +2,12 @@ import { comments } from './comments.js'
 import { initLikeListeners, initReplyListeners } from './initListeners.js'
 
   export const renderComments = () => {
-      const listEl = document.querySelector('.comments');
-      if (listEl) {
-        listEl.innerHTML = "Пожалуйста, подождите, загружаю комментарии.";
-      } else {
-          console.error('Элемент с классом .comments не найден');
-      }
+    const listEl = document.querySelector('.comments');
+    if (listEl) {
+      listEl.innerHTML = "Пожалуйста, подождите, загружаю комментарии.";
+  } else {
+      console.error('Элемент с классом .comments не найден');
+  }
 
   if (Array.isArray(comments)) {
     listEl.innerHTML = comments

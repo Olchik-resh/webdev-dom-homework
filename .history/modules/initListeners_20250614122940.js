@@ -1,7 +1,7 @@
 import { postComment } from './api.js'
 import { comments, updateComments } from './comments.js'
 import { sanitizeHtml } from './sanitizeHtml.js'
-import { host } from './api.js'
+import {host}
 
 export const initLikeListeners = (renderComments) => {
     const likeButtons = document.querySelectorAll('.like-button')
@@ -27,7 +27,7 @@ export const initLikeListeners = (renderComments) => {
 export const initReplyListeners = () => {
     const text = document.getElementById('text-input')
     const commentElements = document.querySelectorAll('.comment')
-    
+
     for (const commentElement of commentElements) {
         commentElement.addEventListener('click', () => {
             const currentComment = comments[commentElement.dataset.index]
@@ -51,24 +51,31 @@ export const initAddCommentListener = (renderComments) => {
         document.querySelector('.add-form').style.display = 'none'
 
         postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
-            .then(() => {
-                // После успешного добавления комментария делаем GET-запрос за новыми актуальными комментариями
-                return fetch(host + '/comments', {
-                    method: 'GET',
-                })
-            })
-            .then((response) => {
-                    return response.json()
-            })
-            .then((data) => {
-                document.querySelector('.form-loading').style.display = 'none'
-                document.querySelector('.add-form').style.display = 'flex'
-                
-                updateComments(data)
-                renderComments()
-                name.value = ''
-                text.value = ''
-            })
-            
-    })
-}
+        .then(() => {
+            // После успешного добавления комментария делаем GET-запрос за новыми актуальными комментариями
+            return fetch(host + '/comments', {
+            method: 'GET',
+            });
+        })
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+            } else {
+            throw new Error('Ошибка при получении комментариев');
+            }
+        })
+        .then(data => {
+            document.querySelector('.form-loading').style.display = 'none';
+            document.querySelector('.add-form').style.display = 'flex';
+            updateComments(data);
+            renderComments();
+            name.value = '';
+            text.value = '';
+        })
+  .catch(error => {
+    console.error('Ошибка:', error);
+  });
+            },
+        )
+    }
+

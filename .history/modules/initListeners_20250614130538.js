@@ -28,6 +28,7 @@ export const initReplyListeners = () => {
     const text = document.getElementById('text-input')
     const commentElements = document.querySelectorAll('.comment')
     
+
     for (const commentElement of commentElements) {
         commentElement.addEventListener('click', () => {
             const currentComment = comments[commentElement.dataset.index]

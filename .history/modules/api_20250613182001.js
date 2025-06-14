@@ -1,7 +1,4 @@
-import { updateComments } from "./comments.js"
-import { renderComments } from "./renderComments.js"
-
-export const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
+const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
 
 export const fetchComments = () => {
     return fetch(host + '/comments')
@@ -9,7 +6,6 @@ export const fetchComments = () => {
             return res.json()
         })
         .then((responseData) => {
-            console.log(responseData); // Проверяем формат данных
             const appComments = responseData.comments.map(comment => {
                 return {
                     name: comment.author.name,
@@ -19,22 +15,17 @@ export const fetchComments = () => {
                     isLikes: false,
                 }
             })
-            
-            console.log(appComments);
+
             return appComments
         })
 }
 
-fetchComments()
-    .then(data => {
-        console.log(data); // Проверяем формат данных
-        updateComments(data);
-        renderComments();
-    });
-
 export const postComment = (name, text) => {
     return fetch(host + '/comments', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
             name,
             text,
@@ -42,18 +33,25 @@ export const postComment = (name, text) => {
     })
         .then((response) => {
             if (response.status === 500) {
-                throw new Error('Ошибка сервера')
+                throw new Error('Ошибка сервера');
             }
             if (response.status === 400) {
-                throw new Error('Неверный запрос')
+                throw new Error('Неверный запрос');
             }
             if (response.status === 201) {
-                return response.json()
+                return response.json();
             }
         })
         .catch((error) => {
-            console.error('Ошибка при добавлении комментария:', error)
-        })
+            console.error('Ошибка при добавлении комментария:', error);
+            throw error; // Перебрасываем ошибку дальше
+        });
+};
+
+async function getComments() {
+    const response = await fetch(host + '/comments'); // Замените на ваш URL
+    if (!response.ok) {
+        throw new Error('Ошибка при получении комментариев');
+    }
+    return response.json();
 }
-
-

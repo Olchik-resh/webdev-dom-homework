@@ -27,7 +27,12 @@ export const initLikeListeners = (renderComments) => {
 export const initReplyListeners = () => {
     const text = document.getElementById('text-input')
     const commentElements = document.querySelectorAll('.comment')
-    
+    if (commentsElуьуте) {
+    commentsEl.innerHTML = "Пожалуйста, подождите, загружаю комментарии.";
+} else {
+    console.error('Элемент с классом .comments не найден');
+}
+
     for (const commentElement of commentElements) {
         commentElement.addEventListener('click', () => {
             const currentComment = comments[commentElement.dataset.index]

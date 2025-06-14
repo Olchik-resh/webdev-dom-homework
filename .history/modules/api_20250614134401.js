@@ -19,7 +19,6 @@ export const fetchComments = () => {
                     isLikes: false,
                 }
             })
-            
             console.log(appComments);
             return appComments
         })
