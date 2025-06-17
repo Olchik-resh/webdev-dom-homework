@@ -16,6 +16,7 @@ export const fetchComments = () => {
                 }
             })
 
+            console.log(appComments)
             return appComments
         })
 }

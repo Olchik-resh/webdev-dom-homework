@@ -1,3 +1,4 @@
+
 export const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
 
 export const fetchComments = () => {
@@ -16,9 +17,11 @@ export const fetchComments = () => {
                 }
             })
 
+            console.log(appComments)
             return appComments
         })
 }
+
 
 export const postComment = (name, text) => {
     return fetch(host + '/comments', {

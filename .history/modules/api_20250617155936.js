@@ -15,7 +15,7 @@ export const fetchComments = () => {
                     isLikes: false,
                 }
             })
-
+            ы
             return appComments
         })
 }
