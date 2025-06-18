@@ -1,5 +1,4 @@
-const host = `https://wedev-api.sky.pro/api/v2/:olchik-resh`
-const authHost = `https://wedev-api.sky.pro/api/user`
+export const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
 
 export let token = ''
 
@@ -44,7 +43,7 @@ export const postComment = (name, text) => {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
-        },
+        },ss
         body: JSON.stringify({
             name,
             text,
@@ -64,25 +63,4 @@ export const postComment = (name, text) => {
         .catch((error) => {
             console.error('Ошибка при добавлении комментария:', error)
         })
-}
-
-export const login = (login, password) => {
-    return fetch(authHost + '/login', {
-        method: 'POST',
-        body: JSON.stringify({
-            login: login,
-            password: password,
-        }),
-    })
-}
-
-export const registration = (name, login, password) => {
-    return fetch(authHost, {
-        method: 'POST',
-        body: JSON.stringify({
-            name: name,
-            login: login,
-            password: password,
-        }),
-    })
 }

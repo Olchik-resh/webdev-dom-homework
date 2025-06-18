@@ -73,7 +73,7 @@ export const login = (login, password) => {
             login: login,
             password: password,
         }),
-    })
+    }) юthen(response => response.json());
 }
 
 export const registration = (name, login, password) => {

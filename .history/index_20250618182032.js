@@ -8,7 +8,7 @@ export const fetchAndRenderComments = (isFirstLoading) => {
             `<p>Пожалуйста подождите, загружаю комментарии...</p>`
     }
 
-    fetchComments().then((data) => {
+    fetchComments().then((data.comments) => {
         updateComments(data.comments)
         renderComments()
     })

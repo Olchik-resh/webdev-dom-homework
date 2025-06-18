@@ -10,7 +10,6 @@ import { renderLogin } from './renderLogin.js'
 export const renderComments = () => {
     const container = document.querySelector('.container')
     const commentsHtml = comments
-
         .map((comment, index) => {
             return `
         <li class="comment" data-index="${index}">
@@ -64,11 +63,11 @@ export const renderComments = () => {
                 Комментарий добавляется...
             </div>`
 
-    const linkToLoginText = `<p>чтобы отправить коментарий, <button class="link_login">войдите</button></p>`
+    const linkToLoginText = `<p>чтобы отправить коментарий, <span class="link-login">войдите</span></p>`
 
     const baseHtml = `<ul class="comments">${commentsHtml}</ul>
    ${token ? addCommentsHtml : linkToLoginText}`
-
+    
     container.innerHtml = baseHtml
 
     if (token) {
@@ -76,9 +75,10 @@ export const renderComments = () => {
         initReplyListeners()
         initAddCommentListener(renderComments)
     } else {
-        const linkLoginEl = document.querySelector('.link_login')
-        linkLoginEl.addEventListener('click', () => {
-            renderLogin()
-        })
+       container.addEventListener('click', (event) => {
+    if (event.target.classList.contains('link-login')) {
+        renderLogin();
+    }
+});
     }
 }

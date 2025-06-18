@@ -10,7 +10,6 @@ import { renderLogin } from './renderLogin.js'
 export const renderComments = () => {
     const container = document.querySelector('.container')
     const commentsHtml = comments
-
         .map((comment, index) => {
             return `
         <li class="comment" data-index="${index}">
@@ -64,7 +63,7 @@ export const renderComments = () => {
                 Комментарий добавляется...
             </div>`
 
-    const linkToLoginText = `<p>чтобы отправить коментарий, <button class="link_login">войдите</button></p>`
+    const linkToLoginText = `<p>чтобы отправить коментарий, <button class="link_login">войдите</span></p>`
 
     const baseHtml = `<ul class="comments">${commentsHtml}</ul>
    ${token ? addCommentsHtml : linkToLoginText}`

@@ -9,6 +9,7 @@ import { renderLogin } from './renderLogin.js'
 
 export const renderComments = () => {
     const container = document.querySelector('.container')
+    console.log(comments)
     const commentsHtml = comments
 
         .map((comment, index) => {

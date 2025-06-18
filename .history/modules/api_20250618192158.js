@@ -73,7 +73,7 @@ export const login = (login, password) => {
             login: login,
             password: password,
         }),
-    })
+    }) .then(response => response.json());
 }
 
 export const registration = (name, login, password) => {
@@ -84,5 +84,5 @@ export const registration = (name, login, password) => {
             login: login,
             password: password,
         }),
-    })
+    }).then(response => response.json());
 }

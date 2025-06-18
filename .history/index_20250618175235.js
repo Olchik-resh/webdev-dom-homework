@@ -8,10 +8,19 @@ export const fetchAndRenderComments = (isFirstLoading) => {
             `<p>Пожалуйста подождите, загружаю комментарии...</p>`
     }
 
-    fetchComments().then((data) => {
-        updateComments(data.comments)
+  fetchComments().then((data) => {
+        updateComments(data)
+
+        // Проверка наличия контейнера перед рендерингом комментариев
+        const container = document.querySelector('.container')
+        if (!container) {
+            console.error('Контейнер не найден')
+            return
+        }
+
         renderComments()
     })
 }
+
 
 fetchAndRenderComments(true)

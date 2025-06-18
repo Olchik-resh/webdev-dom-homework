@@ -9,7 +9,15 @@ export const fetchAndRenderComments = (isFirstLoading) => {
     }
 
     fetchComments().then((data) => {
-        updateComments(data.comments)
+        updateComments(data)
+
+        // Проверка наличия контейнера перед рендерингом комментариев
+        const container = document.querySelector('.container')
+        if (!container) {
+            console.error('Контейнер не найден')
+            return
+        }
+
         renderComments()
     })
 }

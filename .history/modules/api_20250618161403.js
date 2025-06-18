@@ -1,5 +1,5 @@
-const host = `https://wedev-api.sky.pro/api/v2/:olchik-resh`
-const authHost = `https://wedev-api.sky.pro/api/user`
+export const host = `https://wedev-api.sky.pro/api/v1/olchik-resh`
+
 
 export let token = ''
 

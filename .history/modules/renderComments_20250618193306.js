@@ -10,7 +10,7 @@ import { renderLogin } from './renderLogin.js'
 export const renderComments = () => {
     const container = document.querySelector('.container')
     const commentsHtml = comments
-
+    console.log(comments);
         .map((comment, index) => {
             return `
         <li class="comment" data-index="${index}">
