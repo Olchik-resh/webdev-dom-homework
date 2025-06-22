@@ -12,6 +12,7 @@ export const fetchAndRenderComments = async (isFirstLoading) => {
         const data = await fetchComments()
         updateComments(data)
         renderComments()
+        
     } catch (error) {
         console.error('Ошибка при загрузке комментариев:', error)
     }

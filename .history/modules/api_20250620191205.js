@@ -66,6 +66,8 @@ export const postComment = (name, text) => {
         })
 }
 
+initAddCommentListener(renderComments)
+
 export const login = (login, password) => {
     return fetch(authHost + '/login', {
         method: 'POST',

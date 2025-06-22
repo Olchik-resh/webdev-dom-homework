@@ -71,9 +71,9 @@ export const renderComments = () => {
     container.innerHtml = baseHtml
 
     if (token) {
-        initLikeListeners(renderComments)
-        initReplyListeners(renderComments)
-        initAddCommentListener(renderComments)
+        initLikeListeners(re)
+        initReplyListeners()
+        initAddCommentListener()
     } else {
         const linkLoginEl = document.querySelector('.link_login')
         if (linkLoginEl) {

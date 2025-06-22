@@ -39,7 +39,7 @@ export const renderComments = () => {
 
     container.innerHTML = commentsHtml
 
-    const addCommentsHtml = `
+    econst addCommentsHtml = `
             <div class="add-form">
                 <input
                   type="text"

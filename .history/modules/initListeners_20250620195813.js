@@ -35,7 +35,7 @@ export const initReplyListeners = () => {
     }
 }
 
-export const initAddCommentListener = (renderComments) => {
+export const initAddCommentListener = () => {
     const name = document.getElementById('name-input')
     const text = document.getElementById('text-input')
     const addButton = document.querySelector('.add-form-button')
@@ -60,7 +60,7 @@ export const initAddCommentListener = (renderComments) => {
         })
         .then((comments) => {
             updateComments(comments)
-            renderComments()
+
             document.querySelector('.form-loading').style.display = 'none'
             document.querySelector('.add-form').style.display = 'flex'
 

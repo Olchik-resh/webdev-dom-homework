@@ -63,6 +63,8 @@ export const renderComments = () => {
                 Комментарий добавляется...
             </div>`
 
+    
+
     const linkToLoginText = `<p>чтобы отправить коментарий, <button class="link_login">войдите</button></p>`
 
     const baseHtml = `<ul class="comments">${commentsHtml}</ul>
@@ -72,7 +74,7 @@ export const renderComments = () => {
 
     if (token) {
         initLikeListeners(renderComments)
-        initReplyListeners(renderComments)
+        initReplyListeners()
         initAddCommentListener(renderComments)
     } else {
         const linkLoginEl = document.querySelector('.link_login')

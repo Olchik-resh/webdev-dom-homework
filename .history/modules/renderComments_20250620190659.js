@@ -38,6 +38,7 @@ export const renderComments = () => {
         .join('')
 
     container.innerHTML = commentsHtml
+    initAddCommentListener(renderComments)
 
     const addCommentsHtml = `
             <div class="add-form">
@@ -72,7 +73,7 @@ export const renderComments = () => {
 
     if (token) {
         initLikeListeners(renderComments)
-        initReplyListeners(renderComments)
+        initReplyListeners()
         initAddCommentListener(renderComments)
     } else {
         const linkLoginEl = document.querySelector('.link_login')

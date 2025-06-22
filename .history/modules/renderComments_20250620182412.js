@@ -72,7 +72,7 @@ export const renderComments = () => {
 
     if (token) {
         initLikeListeners(renderComments)
-        initReplyListeners(renderComments)
+        initReplyListeners()
         initAddCommentListener(renderComments)
     } else {
         const linkLoginEl = document.querySelector('.link_login')

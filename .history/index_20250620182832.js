@@ -8,13 +8,9 @@ export const fetchAndRenderComments = async (isFirstLoading) => {
             `<p>Пожалуйста подождите, загружаю комментарии...</p>`
     }
 
-    try {
-        const data = await fetchComments()
-        updateComments(data)
-        renderComments()
-    } catch (error) {
-        console.error('Ошибка при загрузке комментариев:', error)
-    }
+    const data = await fetchComments()
+    updateComments(data)
+    renderComments()
 }
 
 document.addEventListener('DOMContentLoaded', () => {

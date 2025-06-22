@@ -40,31 +40,35 @@ export const initAddCommentListener = (renderComments) => {
     const text = document.getElementById('text-input')
     const addButton = document.querySelector('.add-form-button')
 
-    if (addButton) {
+     if (addButton) {
         addButton.addEventListener('click', () => {
-            if (!name.value || !text.value) {
-                console.error('заполните форму')
-                return
-            }
-        })
+            // ваш код
+        });
     } else {
-        console.error('Элемент с классом .add-form-button не найден')
+        console.error('Элемент с классом .add-form-button не найден');
     }
 
-    document.querySelector('.form-loading').style.display = 'block'
-    document.querySelector('.add-form').style.display = 'none'
+    addButton.addEventListener('click', () => {
+        if (!name.value || !text.value) {
+            console.error('заполните форму')
+            return
+        }
 
-    postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
-        .then(() => {
-            return fetchComments()
-        })
-        .then((comments) => {
-            updateComments(comments)
-            renderComments()
-            document.querySelector('.form-loading').style.display = 'none'
-            document.querySelector('.add-form').style.display = 'flex'
+        document.querySelector('.form-loading').style.display = 'block'
+        document.querySelector('.add-form').style.display = 'none'
 
-            name.value = ''
-            text.value = ''
-        })
+        postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
+            .then(() => {
+                return fetchComments()
+            })
+            .then((comments) => {
+                updateComments(comments)
+                renderComments()
+                document.querySelector('.form-loading').style.display = 'none'
+                document.querySelector('.add-form').style.display = 'flex'
+
+                name.value = ''
+                text.value = ''
+            })
+    })
 }

@@ -35,7 +35,7 @@ export const initReplyListeners = () => {
     }
 }
 
-export const initAddCommentListener = (renderComments) => {
+export const initAddCommentListener =ss (renderComments) => {
     const name = document.getElementById('name-input')
     const text = document.getElementById('text-input')
     const addButton = document.querySelector('.add-form-button')

@@ -65,6 +65,8 @@ export const renderComments = () => {
 
     const linkToLoginText = `<p>чтобы отправить коментарий, <button class="link_login">войдите</button></p>`
 
+    
+
     const baseHtml = `<ul class="comments">${commentsHtml}</ul>
    ${token ? addCommentsHtml : linkToLoginText}`
 
@@ -72,16 +74,12 @@ export const renderComments = () => {
 
     if (token) {
         initLikeListeners(renderComments)
-        initReplyListeners(renderComments)
+        initReplyListeners()
         initAddCommentListener(renderComments)
     } else {
         const linkLoginEl = document.querySelector('.link_login')
-        if (linkLoginEl) {
-            linkLoginEl.addEventListener('click', () => {
-                renderLogin()
-            })
-        } else {
-            console.error('Link login element not found')
-        }
+        linkLoginEl.addEventListener('click', () => {
+            renderLogin()
+        })
     }
 }
