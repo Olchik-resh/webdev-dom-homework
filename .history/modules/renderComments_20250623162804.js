@@ -37,6 +37,8 @@ export const renderComments = () => {
         })
         .join('')
 
+    
+
     const addCommentsHtml = `
             <div class="add-form">
                 <input
@@ -61,7 +63,7 @@ export const renderComments = () => {
                 Комментарий добавляется...
             </div>`
 
-    const linkToLoginText = `<p>чтобы отправить коментарий, <span class="link_login">войдите</span></p>`
+    const linkToLoginText = `<p>чтобы отправить коментарий, <button class="link_login">войдите</button></p>`
 
     const baseHtml = `<ul class="comments">${commentsHtml}</ul>
    ${token ? addCommentsHtml : linkToLoginText}`

@@ -96,10 +96,6 @@ body {
     margin-top: 48px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
 }
 
 .add-form-name,
@@ -151,9 +147,10 @@ body {
 
 .button-main {
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: ;
     padding-left: 30px;
     padding-right: 30px;
+   
 }
 
 .link_login {

@@ -61,7 +61,7 @@ export const renderComments = () => {
                 Комментарий добавляется...
             </div>`
 
-    const linkToLoginText = `<p>чтобы отправить коментарий, <span class="link_login">войдите</span></p>`
+    const linkToLoginText = `<p>чтобы отправить коментарий, <span class="link_login">войдите</></p>`
 
     const baseHtml = `<ul class="comments">${commentsHtml}</ul>
    ${token ? addCommentsHtml : linkToLoginText}`
