@@ -40,12 +40,14 @@ export const initAddCommentListener = (renderComments) => {
     const text = document.getElementById('text-input')
     const addButton = document.querySelector('.add-form-button')
 
-    addButton.addEventListener('click', () => {
-        if (!name.value || !text.value) {
-            console.error('заполните форму')
-            return
-        }
-    })
+    if (addButton) {
+        addButton.addEventListener('click', () => {
+            if (!name.value || !text.value) {
+                console.error('заполните форму')
+                return
+            }
+        })
+    
 
     document.querySelector('.form-loading').style.display = 'block'
     document.querySelector('.add-form').style.display = 'none'

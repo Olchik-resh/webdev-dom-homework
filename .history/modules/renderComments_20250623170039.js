@@ -70,12 +70,13 @@ export const renderComments = () => {
 
     if (token) {
         initLikeListeners(renderComments)
-        initReplyListeners()
+        initReplyListeners(renderComments)
         initAddCommentListener(renderComments)
     } else {
         const linkLoginEl = document.querySelector('.link_login')
-        linkLoginEl.addEventListener('click', () => {
-            renderLogin()
-        })
-    }
-}
+        if (linkLoginEl) {
+            linkLoginEl.addEventListener('click', () => {
+                renderLogin()
+            
+    
+

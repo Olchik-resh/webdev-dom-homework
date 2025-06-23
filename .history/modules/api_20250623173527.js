@@ -18,6 +18,7 @@ export const fetchComments = () => {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
+           
         },
     })
         .then((res) => {

@@ -50,14 +50,13 @@ export const renderRegistration = () => {
                 return response.json()
             })
             .then((data) => {
-                console.log(data) // Добавьте эту строку для отладки
-                if (data && data.user && data.user.token) {
-                    setToken(data.user.token)
-                    setName(data.user.name)
-                    fetchAndRenderComments()
-                } else {
-                    console.log('Ошибка: токен не определён')
-                }
-            })
-    })
+console.log(data); // Добавьте эту строку для отладки
+if (data && data.user && data.user.token) {
+setToken(data.user.token);
+setName(data.user.name);
+fetchAndRenderComments();
+} else {
+console.log('Ошибка: токен не определён');
+}
+})
 }

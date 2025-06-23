@@ -9,7 +9,7 @@ export const fetchAndRenderComments = (isFirstLoading) => {
     }
 
     fetchComments().then((data) => {
-        updateComments(data) 
+        updateComments(data) // Передаем только массив комментариев
         renderComments()
     })
 }
