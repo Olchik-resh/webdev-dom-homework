@@ -36,31 +36,31 @@ export const initReplyListeners = () => {
 }
 
 export const initAddCommentListener = (renderComments) => {
-    const name = document.getElementById('name-input')
-    const text = document.getElementById('text-input')
-    const addButton = document.querySelector('.add-form-button')
+    const name = document.getElementById('name-input');
+    const text = document.getElementById('text-input');
+    const addButton = document.querySelector('.add-form-button');
 
     addButton.addEventListener('click', () => {
         if (!name.value || !text.value) {
-            console.error('заполните форму')
-            return
+            console.error('заполните форму');
+            return;
         }
 
-        document.querySelector('.form-loading').style.display = 'block'
-        document.querySelector('.add-form').style.display = 'none'
+        document.querySelector('.form-loading').style.display = 'block';
+        document.querySelector('.add-form').style.display = 'none';
 
         postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
             .then(() => {
-                return fetchComments()
+                return fetchComments();
             })
             .then((comments) => {
-                document.querySelector('.form-loading').style.display = 'none'
-                document.querySelector('.add-form').style.display = 'flex'
+                updateComments(comments);
+                renderComments();
+                document.querySelector('.form-loading').style.display = 'none';
+                document.querySelector('.add-form').style.display = 'flex';
 
-                updateComments(comments)
-                renderComments()
-                name.value = ''
-                text.value = ''
-            })
-    })
-}
+                name.value = '';
+                text.value = '';
+            });
+    });
+};

@@ -45,22 +45,22 @@ export const initAddCommentListener = (renderComments) => {
             console.error('заполните форму')
             return
         }
-
-        document.querySelector('.form-loading').style.display = 'block'
-        document.querySelector('.add-form').style.display = 'none'
-
-        postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
-            .then(() => {
-                return fetchComments()
-            })
-            .then((comments) => {
-                document.querySelector('.form-loading').style.display = 'none'
-                document.querySelector('.add-form').style.display = 'flex'
-
-                updateComments(comments)
-                renderComments()
-                name.value = ''
-                text.value = ''
-            })
     })
-}
+
+    document.querySelector('.form-loading').style.display = 'block'
+    document.querySelector('.add-form').style.display = 'none'
+
+    postComment(sanitizeHtml(name.value), sanitizeHtml(text.value))
+        .then(() => {
+            return fetchComments()
+        })
+        .then((comments) => {
+            updateComments(comments)
+            renderComments()
+            document.querySelector('.form-loading').style.display = 'none'
+            document.querySelector('.add-form').style.display = 'flex'
+
+            name.value = ''
+            text.value = ''
+        })
+

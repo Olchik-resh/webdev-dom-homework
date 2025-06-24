@@ -54,11 +54,11 @@ export const initAddCommentListener = (renderComments) => {
                 return fetchComments()
             })
             .then((comments) => {
+                updateComments(comments)
+                renderComments()
                 document.querySelector('.form-loading').style.display = 'none'
                 document.querySelector('.add-form').style.display = 'flex'
 
-                updateComments(comments)
-                renderComments()
                 name.value = ''
                 text.value = ''
             })

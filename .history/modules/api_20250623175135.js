@@ -1,7 +1,7 @@
 const host = `https://wedev-api.sky.pro/api/v2/:olchik-resh`
 const authHost = `https://wedev-api.sky.pro/api/user`
 
-export let token = ''
+export let token = 'asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k'
 
 export const setToken = (newToken) => {
     token = newToken
@@ -17,7 +17,7 @@ export const fetchComments = () => {
     return fetch(host + '/comments', {
         method: 'GET',
         headers: {
-            Authorization: `Bearer $ {userData ? userData.token : token}`,
+            Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {
@@ -42,7 +42,7 @@ export const postComment = (name, text) => {
     return fetch(host + '/comments', {
         method: 'POST',
         headers: {
-            Authorization: `Bearer $ {userData ? userData.token : token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({

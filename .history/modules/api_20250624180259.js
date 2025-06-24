@@ -17,7 +17,7 @@ export const fetchComments = () => {
     return fetch(host + '/comments', {
         method: 'GET',
         headers: {
-            Authorization: `Bearer $ {userData ? userData.token : token}`,
+            Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {
@@ -39,6 +39,11 @@ export const fetchComments = () => {
 }
 
 export const postComment = (name, text) => {
+    if (!name || !text) {
+        console.error('Имя и текст комментария обязательны');
+        return Promise.reject(new Error('Имя и текст комментария обязательны'));
+    }
+
     return fetch(host + '/comments', {
         method: 'POST',
         headers: {

@@ -17,7 +17,7 @@ export const fetchComments = () => {
     return fetch(host + '/comments', {
         method: 'GET',
         headers: {
-            Authorization: `Bearer $ {userData ? userData.token : token}`,
+            Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {
@@ -49,17 +49,19 @@ export const postComment = (name, text) => {
             name,
             text,
         }),
-    }).then((response) => {
-        if (response.status === 500) {
-            throw new Error('Ошибка сервера')
-        }
-        if (response.status === 400) {
-            throw new Error('Неверный запрос')
-        }
-        if (response.status === 201) {
-            return response.json()
-        }
     })
+        .then((response) => {
+            if (response.status === 500) {
+                throw new Error('Ошибка сервера')
+            }
+            if (response.status === 400) {
+                throw new Error('Неверный запрос')
+            }
+            if (response.status === 201) {
+                return response.json()
+            }
+        })
+        )
 }
 
 export const login = (login, password) => {

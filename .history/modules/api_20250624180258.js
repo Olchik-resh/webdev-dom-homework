@@ -17,7 +17,7 @@ export const fetchComments = () => {
     return fetch(host + '/comments', {
         method: 'GET',
         headers: {
-            Authorization: `Bearer $ {userData ? userData.token : token}`,
+            Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {
@@ -39,6 +39,7 @@ export const fetchComments = () => {
 }
 
 export const postComment = (name, text) => {
+    
     return fetch(host + '/comments', {
         method: 'POST',
         headers: {
