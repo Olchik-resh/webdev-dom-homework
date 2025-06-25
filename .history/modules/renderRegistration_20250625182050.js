@@ -6,7 +6,7 @@ export const renderRegistration = () => {
     const container = document.querySelector('.container')
 
     const loginHtml = `
-        <section class="add-form-reg"> 
+        <section class="add-form-re"> 
             <h1>Форма регистрации</h1>
                 <input
                     type="text"

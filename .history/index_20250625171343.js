@@ -2,7 +2,8 @@ import { fetchComments } from './modules/api.js'
 import { updateComments } from './modules/comments.js'
 import { renderComments } from './modules/renderComments.js'
 
-
+уconst userDataString = localStorage.getItem('userData');
+const userData = userDataString ? JSON.parse(userDataString) : null;
 
 export const fetchAndRenderComments = (isFirstLoading) => {
     if (isFirstLoading) {

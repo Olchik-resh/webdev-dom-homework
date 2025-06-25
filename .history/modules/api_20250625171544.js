@@ -1,5 +1,7 @@
-const host = `https://wedev-api.sky.pro/api/v2/olchik-resh`
+const host = `https://wedev-api.sky.pro/api/v2/:olchik-resh`
 const authHost = `https://wedev-api.sky.pro/api/user`
+
+
 
 export let token = ''
 
@@ -12,6 +14,9 @@ export let name = ''
 export const setName = (newName) => {
     name = newName
 }
+
+export const userDataString = localStorage.getItem('userData');
+export const userData = userDataString ? JSON.parse(userDataString) : null;
 
 export const fetchComments = () => {
     return fetch(host + '/comments', {
@@ -36,12 +41,11 @@ export const fetchComments = () => {
 }
 
 export const postComment = (name, text) => {
-    const userDataString = localStorage.getItem('userData')
-    const userData = userDataString ? JSON.parse(userDataString) : null
     return fetch(host + '/comments', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${userData ? userData.token : token}`,
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             name,

@@ -153,13 +153,12 @@ body {
 }
 
 .button-main {
-    margin-top: 24px;
-    font-size: 24px;
-    padding: 10px 50px;
-    background-color: #bcec30;
-    border: none;
-    border-radius: 18px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding-left: 55px;
+    padding-right: 55px;
     cursor: pointer;
+    padding-top: ;
 }
 
 .link_login {
@@ -174,22 +173,4 @@ body {
 
 .registry {
     cursor: pointer;
-}
-
-.add-form-reg {
-    display: flex;
-    width: 596px;
-    box-sizing: border-box;
-    background: radial-gradient(
-        75.42% 75.42% at 50% 42.37%,
-        rgba(53, 53, 53, 0) 22.92%,
-        #7334ea 100%
-    );
-    filter: drop-shadow(0px 20px 67px rgba(0, 0, 0, 0.08));
-    border-radius: 20px;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-around;
-    justify-content: space-between;
-    align-items: center;
 }

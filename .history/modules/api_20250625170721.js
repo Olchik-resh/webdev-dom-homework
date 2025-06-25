@@ -1,4 +1,4 @@
-const host = `https://wedev-api.sky.pro/api/v2/olchik-resh`
+const host = `https://wedev-api.sky.pro/api/v2/:olchik-resh`
 const authHost = `https://wedev-api.sky.pro/api/user`
 
 export let token = ''
@@ -42,6 +42,7 @@ export const postComment = (name, text) => {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${userData ? userData.token : token}`,
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             name,
